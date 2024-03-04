@@ -21,7 +21,7 @@ body{
     color: rgb(204, 217, 228);
 }
 
-.contentContainer{
+.defaultContentContainer{
     position:absolute;
     top: 50%;
     left: 50%;
@@ -35,7 +35,7 @@ body{
     justify-content: space-evenly;
 }
 
-.formContainer{
+.inputForm{
     width: 100%;
     height: 2em; 
     border-radius: 1em;
@@ -60,7 +60,7 @@ body{
 #searchButton{
     height: 2em;
     width: 2em;
-    background-color: none;
+    background-color: white;
     background-image: url(./images/searchIcon.png);
     background-position: center;
     background-size: contain;
