@@ -5,12 +5,12 @@
     <title>TempChecks</title>
 </head>
 <body>
-    <div class="contentContainer">
+    <div class="defaultContentContainer">
         <h1 class="pageTitle">TempChecks</h1>
-        <div class="formContainer">
-                <input type="text" name="locationInput" id="locationInput" placeholder="Location:">
-                <button type="button" id="searchButton"></button>
-        </div>
+        <form action="GET" class="inputForm">
+            <input type="text" name="locationInput" id="locationInput" placeholder="Location:">
+            <button type="submit" id="searchButton"></button>
+        </form>
     </div>
     
     <script src="main.js"></script>
