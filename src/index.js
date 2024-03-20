@@ -4,15 +4,15 @@ import "./style.css";
     getWeather fetches a response containing weather data of a given location and returns it
     as a JavaScript object.
 */
-async function getWeather(location){
-        const response = await fetch(
-            `https://api.weatherapi.com/v1/current.json?key=19be7690d2fb42ce924102105241802&q=${location}`
-        );
-        const weatherData = await response.json();
-        if(!weatherData.location){
-            throw new Error("No location found!")
-        }
-        return weatherData; 
+async function getWeather(location){  
+    const response = await fetch(
+        `https://api.weatherapi.com/v1/current.json?key=19be7690d2fb42ce924102105241802&q=${location}`
+    );   
+    const weatherData = await response.json();
+    if(!weatherData.location){
+        throw new Error("No location found!")
+    }
+    return weatherData;
 }
 
 /*
@@ -58,23 +58,33 @@ function renderPage(){
 
     //Create new elements for the page:
     const locationName = document.createElement('h3');
+    const countryName = document.createElement('h4');
+    const dataWrapper = document.createElement('div');
     const locationTemp = document.createElement('p');
 
     //Add class names to the new elements:
     locationName.className = "locationName";
+    countryName.className = "countryName";
+    dataWrapper.className = "dataWrapper";
     locationTemp.className = "locationTemp";
+
+    //Append weather data to data wrapper:
+    dataWrapper.appendChild(locationTemp);
 
     //Append the new elements to the page:
     contentContainer.appendChild(locationName);
-    contentContainer.appendChild(locationTemp);
+    contentContainer.appendChild(countryName);
+    contentContainer.appendChild(dataWrapper);
 }
 
 function fillPageData(data){
     const locationName = document.querySelector('.locationName');
+    const countryName = document.querySelector('.countryName');
     const locationTemp = document.querySelector('.locationTemp');
 
     locationName.innerHTML = data.location.name;
-    locationTemp.innerHTML = `${data.current.temp_c}°C`;
+    countryName.innerHTML = data.location.country;
+    locationTemp.innerHTML = `Current: ${data.current.temp_c}°C`;
 }
 
 const inputForm = document.querySelector(`#inputForm`);
