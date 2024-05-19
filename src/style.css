@@ -38,7 +38,7 @@ body{
     width: 100%;
     display: grid;
     grid-template-columns: 20% 40% 40%;
-    grid-template-rows: 8% 6% auto;
+    grid-template-rows: 8% 6% 6% auto;
     align-items: center;
     border: 0.5em solid transparent;
 }
@@ -137,13 +137,21 @@ body{
     font-size: 1.2em;
 }
 
-.dataWrapper{
+.dateTime{
     grid-row: 3 / 4;
+    grid-column: 3 / 4;
+    font-size: 1.2em;
+}
+
+.dataWrapper{
+    grid-row: 4 / 5;
     grid-column: 3 / 4;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
 }
 
-.locationTemp{
+.dataWrapper div{
     font-size: 1.5em;
 }

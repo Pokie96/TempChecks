@@ -40,6 +40,7 @@ async function submitInput(){
         return data;
     } else{
         alert("A location must be entered first!")
+        throw new Error("A location must be entered first!")
     }
 }
 
@@ -67,24 +68,31 @@ function renderPage(){
     //Create new elements for the page:
     const locationName = document.createElement('h3');
     const countryName = document.createElement('h4');
+    const dateTime = document.createElement('h4');
     const dataWrapper = document.createElement('div');
     const locationTemp = createWeatherElement("Current Temperature: ", "locationTemp");
     const feelsLikeTemp = createWeatherElement("Feels Like: ", "feelsLikeTemp");
+    const rainChance = createWeatherElement("Chance Of Rain: ", "rainChance");
+    const humidity = createWeatherElement("Humidity: ", "humidity");
+    const uvIndex = createWeatherElement("UV Index: ", "uvIndex");
 
     //Add class names to the new elements:
     locationName.className = "locationName";
     countryName.className = "countryName";
+    dateTime.className = "dateTime";
     dataWrapper.className = "dataWrapper";
-    locationTemp.className = "locationTemp";
-    feelsLikeTemp.className = "feelsLikeTemp";
 
     //Append weather data to data wrapper:
     dataWrapper.appendChild(locationTemp);
     dataWrapper.appendChild(feelsLikeTemp);
+    dataWrapper.appendChild(rainChance);
+    dataWrapper.appendChild(humidity);
+    dataWrapper.appendChild(uvIndex);
 
     //Append the new elements to the page:
     contentContainer.appendChild(locationName);
     contentContainer.appendChild(countryName);
+    contentContainer.appendChild(dateTime);
     contentContainer.appendChild(dataWrapper);
 }
 
@@ -97,13 +105,21 @@ function renderPage(){
 function fillPageData(data){
     const locationName = document.querySelector('.locationName');
     const countryName = document.querySelector('.countryName');
+    const dateTime = document.querySelector('.dateTime');
     const locationTemp = document.querySelector('.locationTemp');
     const feelsLikeTemp = document.querySelector('.feelsLikeTemp');
+    const rainChance = document.querySelector('.rainChance');
+    const humidity = document.querySelector('.humidity');
+    const uvIndex = document.querySelector('.uvIndex');
 
     locationName.innerHTML = data.location.name;
     countryName.innerHTML = data.location.country;
-    locationTemp.innerHTML = `Current: ${data.current.temp_c}°C`;
-    feelsLikeTemp.innerHTML = `Feels Like: ${data.current.feelslike_c}°C`;
+    dateTime.innerHTML = data.location.localtime;
+    locationTemp.innerHTML = `${data.current.temp_c}°C`;
+    feelsLikeTemp.innerHTML = `${data.current.feelslike_c}°C`;
+    rainChance.innerHTML = `${data.forecast.forecastday[0].day.daily_chance_of_rain}%`;
+    humidity.innerHTML = `${data.current.humidity}%`;
+    uvIndex.innerHTML = `${data.current.uv}`;
 }
 
 
