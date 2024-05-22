@@ -37,7 +37,7 @@ body{
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 40% 40%;
+    grid-template-columns: 33% 33% 33%;
     grid-template-rows: 8% 6% 6% auto;
     align-items: center;
     border: 0.5em solid transparent;
@@ -123,6 +123,14 @@ body{
 
 .renderedSearchButton:hover{
     cursor: pointer;
+}
+
+.timeList{
+    grid-row: 4 / 5;
+    grid-column: 1 / 2;
+    height: 100%;
+    width: 100%;
+    padding: 0;
 }
 
 .locationName{
