@@ -18,6 +18,45 @@ async function getWeather(location){
 }
 
 /**
+ * getHourlyDataList assigns the list of all of the hourly readings for a locations temperatures 
+ * to a variable and returns it
+ */
+async function getHourlyDataList(data){
+    const hourlyDataList = data.forecast.forecastday[0].hour;
+    return hourlyDataList;
+}
+
+
+async function renderHourlyDataList(hourlyDataList, startingHour){
+    const timeList = document.querySelector(".timeList");
+    for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
+        //Create the hour element for each hour:
+        const hourElement = document.createElement("li");
+        const hourTime = document.createElement("p");
+        const hourData = document.createElement("p");
+
+
+        //Fill each element with each hour of the day:
+        if(i < 10){
+            hourTime.innerHTML = `0${i}:00`;
+        } 
+        else{
+            hourTime.innerHTML = `${i}:00`;
+        }
+
+        //Add the weather data to each hour element:
+        hourData.innerHTML = `${hourlyDataList[i].temp_c}°C`
+
+        //Append the hour time and hour data elements to the hour container element:
+        hourElement.appendChild(hourTime);
+        hourElement.appendChild(hourData);
+
+        //Append the whole hour element to the time list:
+        timeList.appendChild(hourElement);
+    }
+}
+
+/**
  * populateTimeList populates the time list of the page with the temperatures 
  * for each hour throughout the day of the searched location using the data 
  * received from the weather API 
@@ -201,10 +240,14 @@ function createWeatherElement(weatherKey, weatherValClass){
 async function pageAction(){
     await submitInput()
     .then((resolved) => {
-        console.log(resolved);
         renderPage();
         fillPageData(resolved);
-        populateTimeList(resolved);
+        getHourlyDataList(resolved)
+        .then((resolved) => {
+            renderHourlyDataList(resolved, 12);
+        }, (rejected) => {
+            console.log(rejected);
+        })
     },(rejected) => {
         console.log(rejected);
     })
