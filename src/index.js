@@ -21,14 +21,19 @@ async function getWeather(location){
  * getHourlyDataList assigns the list of all of the hourly readings for a locations temperatures 
  * to a variable and returns it
  */
-async function getHourlyDataList(data){
-    const hourlyDataList = data.forecast.forecastday[0].hour;
+async function getHourlyDataList(){
+    const location = getUserInput();
+    const weatherData = await getWeather(location);
+    const hourlyDataList = weatherData.forecast.forecastday[0].hour;
     return hourlyDataList;
 }
 
 
-async function renderHourlyDataList(hourlyDataList, startingHour){
+async function renderFirstHourlyDataList(){
+    let startingHour = 0;
     const timeList = document.querySelector(".timeList");
+    const hourlyDataList = await getHourlyDataList();
+    const navButton = await createNavigationButton(renderSecondHourlyDataList);
     for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
         //Create the hour element for each hour:
         const hourElement = document.createElement("li");
@@ -54,47 +59,59 @@ async function renderHourlyDataList(hourlyDataList, startingHour){
         //Append the whole hour element to the time list:
         timeList.appendChild(hourElement);
     }
+    timeList.appendChild(navButton);
 }
 
-/**
- * populateTimeList populates the time list of the page with the temperatures 
- * for each hour throughout the day of the searched location using the data 
- * received from the weather API 
- */
-async function populateTimeList(data){
+
+async function renderSecondHourlyDataList(){
+    let startingHour = 12;
     const timeList = document.querySelector(".timeList");
-    const hourArray = data.forecast.forecastday[0].hour;
-    let hour = 0;
-    for(let i = 0; i < hourArray.length; i++){
+    const hourlyDataList = await getHourlyDataList();
+    const navButton = await createNavigationButton(renderFirstHourlyDataList);
+    timeList.appendChild(navButton);
+    for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
         //Create the hour element for each hour:
         const hourElement = document.createElement("li");
         const hourTime = document.createElement("p");
         const hourData = document.createElement("p");
 
         //Fill each element with each hour of the day:
-        if(hour < 10){
-            hourTime.innerHTML = `0${hour}:00`;
+        if(i < 10){
+            hourTime.innerHTML = `0${i}:00`;
         } 
         else{
-            hourTime.innerHTML = `${hour}:00`;
+            hourTime.innerHTML = `${i}:00`;
         }
 
         //Add the weather data to each hour element:
-        hourData.innerHTML = `${hourArray[i].temp_c}°C`
+        hourData.innerHTML = `${hourlyDataList[i].temp_c}°C`
 
         //Append the hour time and hour data elements to the hour container element:
         hourElement.appendChild(hourTime);
         hourElement.appendChild(hourData);
 
-        //Append the whole hour element to the time list:
+        //Append the hour element and the navigation button to the time list:
         timeList.appendChild(hourElement);
-
-        //Increment the hour
-        hour++;
+        
     }
 }
 
+function clearHourlyDataList(){
+    const timeList = document.querySelector('.timeList');
+    timeList.innerHTML = "";
+}
 
+async function createNavigationButton(renderDataList){
+    const navButton = document.createElement('button');
+    navButton.className = 'navButton';
+    navButton.innerHTML = 'test';
+    navButton.addEventListener('click', () => {
+        clearHourlyDataList();
+        renderDataList(getHourlyDataList());
+    });
+    
+    return navButton;
+}
 
 /*
     getUserInput returns the user's input from the text input box.
@@ -242,12 +259,7 @@ async function pageAction(){
     .then((resolved) => {
         renderPage();
         fillPageData(resolved);
-        getHourlyDataList(resolved)
-        .then((resolved) => {
-            renderHourlyDataList(resolved, 12);
-        }, (rejected) => {
-            console.log(rejected);
-        })
+        renderFirstHourlyDataList(getHourlyDataList());
     },(rejected) => {
         console.log(rejected);
     })
