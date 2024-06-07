@@ -1,7 +1,5 @@
 import "./style.css";
 
-
-
 /* 
     getWeather fetches a response containing weather data of a given location and returns it
     as a JavaScript object.
@@ -21,18 +19,20 @@ async function getWeather(location){
  * getHourlyDataList assigns the list of all of the hourly readings for a locations temperatures 
  * to a variable and returns it
  */
-async function getHourlyDataList(){
-    const location = getUserInput();
+async function getHourlyDataList(location){
     const weatherData = await getWeather(location);
     const hourlyDataList = weatherData.forecast.forecastday[0].hour;
     return hourlyDataList;
 }
 
-
+/**
+ * renderFirstHourlyDataList renders the first half of the hourly data list on to the page and adds 
+ * a navigation button with an event listener to render the second half of the hourly data list.
+ */
 async function renderFirstHourlyDataList(){
     let startingHour = 0;
     const timeList = document.querySelector(".timeList");
-    const hourlyDataList = await getHourlyDataList();
+    const hourlyDataList = await getHourlyDataList(location);
     const navButton = await createNavigationButton(renderSecondHourlyDataList);
     for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
         //Create the hour element for each hour:
@@ -62,11 +62,14 @@ async function renderFirstHourlyDataList(){
     timeList.appendChild(navButton);
 }
 
-
+/**
+ * renderSecondHourlyDataList renders the second half of the hourly data list on to the page and adds 
+ * a navigation button with an event listener to render the first half of the hourly data list.
+ */
 async function renderSecondHourlyDataList(){
     let startingHour = 12;
     const timeList = document.querySelector(".timeList");
-    const hourlyDataList = await getHourlyDataList();
+    const hourlyDataList = await getHourlyDataList(location);
     const navButton = await createNavigationButton(renderFirstHourlyDataList);
     timeList.appendChild(navButton);
     for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
@@ -96,18 +99,45 @@ async function renderSecondHourlyDataList(){
     }
 }
 
-function clearHourlyDataList(){
-    const timeList = document.querySelector('.timeList');
-    timeList.innerHTML = "";
+function clearPageData(){
+    const contentContainer = document.querySelector('.renderedContentContainer');
+    if(contentContainer != null){
+        const locationName = document.querySelector(".locationName");
+        const countryName = document.querySelector(".countryName");
+        const dateTime = document.querySelector('.dateTime');
+        const dataWrapper = document.querySelector('.dataWrapper');
+        const timeList = document.querySelector('.timeList');
+
+        locationName.remove();
+        countryName.remove();
+        dateTime.remove();
+        dataWrapper.remove();
+        timeList.remove();
+    }
 }
 
+/**
+ * clearHourlyDataList clears the list element containing all of the hourly data.
+ */
+function clearHourlyDataList(){
+    const timeList = document.querySelector('.timeList');
+    if(timeList != null){
+        timeList.innerHTML = "";
+    }
+}
+
+/**
+ * createNavigationButton creates and returns a button with an event listener attached to it.
+ * When clicked the button first clears the hourly data list before rendering one of the halfs 
+ * of the list depending on the function given to the parameter. 
+ */
 async function createNavigationButton(renderDataList){
     const navButton = document.createElement('button');
     navButton.className = 'navButton';
     navButton.innerHTML = 'test';
     navButton.addEventListener('click', () => {
         clearHourlyDataList();
-        renderDataList(getHourlyDataList());
+        renderDataList(getHourlyDataList(location));
     });
     
     return navButton;
@@ -128,17 +158,15 @@ function getUserInput(){
     submitInput calls the Weather API with the user's input as the argument.
     getWeather is only called if a value has been entered by the user.
 */
-async function submitInput(){
+async function submitInput(location){
     if(getUserInput() != ""){
-        const data = await getWeather(getUserInput()); 
+        const data = await getWeather(location); 
         return data;
     } else{
         alert("A location must be entered first!")
         throw new Error("A location must be entered first!")
     }
 }
-
-
 
 /*
     renderPage renders the new layout of the page once a submission of 
@@ -219,7 +247,6 @@ function fillPageData(data){
     uvIndex.innerHTML = `${data.current.uv}`;
 }
 
-
 /**
  * createWeatherElement is a helper function that will create an element 
  * containing a single piece of data, along with the key annotating the 
@@ -248,31 +275,31 @@ function createWeatherElement(weatherKey, weatherValClass){
     return div;
 }
 
-
+let location = null;
 
 /**
  * pageAction is the main function for the page when the search button 
  * is pressed
  */
 async function pageAction(){
-    await submitInput()
+    location = getUserInput();
+    console.log(location);
+    await submitInput(location)
     .then((resolved) => {
+        clearPageData();
+        clearHourlyDataList();
         renderPage();
         fillPageData(resolved);
-        renderFirstHourlyDataList(getHourlyDataList());
+        renderFirstHourlyDataList(getHourlyDataList(location));
     },(rejected) => {
         console.log(rejected);
     })
 }
 
-
 /**
- * Event listener and selector for the input form, 
- * granting functionality to the page.
+ * Event listener to initialise the main event of the page
  */
-
 const inputForm = document.querySelector(`#inputForm`);
-
 inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
     pageAction();
