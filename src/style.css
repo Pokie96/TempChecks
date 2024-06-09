@@ -4,10 +4,10 @@
     box-sizing: border-box;
     margin: 0;
     font-family: "Josefin Sans";
-    color: rgb(204, 217, 228);
 }
 
 body{
+    color: rgb(204, 217, 228);
     overflow-y: hidden;
     overflow-x: hidden;
     background-image:    url(./images/BackgroundImage2.jpg);
@@ -73,7 +73,7 @@ body{
     background-color: white;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: transparent;
 }
 
@@ -87,7 +87,7 @@ body{
 
 .renderedInput{
     height: 2.3em; 
-    width: 30em;
+    width: 300px;
     border: none;
     border-radius: 0.5em;
     color: black;
@@ -118,7 +118,7 @@ body{
     border: none;
     background-color: transparent;
     position: relative;
-    right: 2em;
+    right: 30px;
 }
 
 .renderedSearchButton:hover{
@@ -139,8 +139,39 @@ body{
 .timeList li{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+    margin-left: 20px;
+}
+
+.timeList li p{
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.timeList li .hourData{
+    margin-left: 30px;
+}
+
+.timeList .navButton{
+    width: 135px;
+    height: 35x;
+    margin-left: 20px;
+    color: black;
+    font-size: 30px;
+    background-color: transparent;
+    color: rgb(204, 217, 228);
+    border: solid  rgb(204, 217, 228) 1px;
+}
+
+.timeList .navButton:hover{
+    cursor: pointer;
+    border: rgb(102, 109, 116) solid 1px;
+}
+
+.imageWrapper{
+    grid-row: 4 / 5;
+    grid-column: 2 / 3;
 }
 
 .locationName{

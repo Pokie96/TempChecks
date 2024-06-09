@@ -33,13 +33,17 @@ async function renderFirstHourlyDataList(){
     let startingHour = 0;
     const timeList = document.querySelector(".timeList");
     const hourlyDataList = await getHourlyDataList(location);
-    const navButton = await createNavigationButton(renderSecondHourlyDataList);
+    const navButton = await createDownwardNavigationButton(renderSecondHourlyDataList);
     for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
         //Create the hour element for each hour:
         const hourElement = document.createElement("li");
         const hourTime = document.createElement("p");
         const hourData = document.createElement("p");
 
+        //Add classes to the elements:
+        hourElement.className = "hourElement";
+        hourTime.className = "hourTime";
+        hourData.className = "hourData";
 
         //Fill each element with each hour of the day:
         if(i < 10){
@@ -70,13 +74,18 @@ async function renderSecondHourlyDataList(){
     let startingHour = 12;
     const timeList = document.querySelector(".timeList");
     const hourlyDataList = await getHourlyDataList(location);
-    const navButton = await createNavigationButton(renderFirstHourlyDataList);
+    const navButton = await createUpwardNavigationButton(renderFirstHourlyDataList);
     timeList.appendChild(navButton);
     for(let i = startingHour; i < startingHour + 12 && i < 24; i++){
         //Create the hour element for each hour:
         const hourElement = document.createElement("li");
         const hourTime = document.createElement("p");
         const hourData = document.createElement("p");
+
+        //Add classes to the elements:
+        hourElement.className = "hourElement";
+        hourTime.className = "hourTime";
+        hourData.className = "hourData";
 
         //Fill each element with each hour of the day:
         if(i < 10){
@@ -131,10 +140,22 @@ function clearHourlyDataList(){
  * When clicked the button first clears the hourly data list before rendering one of the halfs 
  * of the list depending on the function given to the parameter. 
  */
-async function createNavigationButton(renderDataList){
+async function createDownwardNavigationButton(renderDataList){
     const navButton = document.createElement('button');
     navButton.className = 'navButton';
-    navButton.innerHTML = 'test';
+    navButton.innerHTML = '&#x21E9';
+    navButton.addEventListener('click', () => {
+        clearHourlyDataList();
+        renderDataList(getHourlyDataList(location));
+    });
+    
+    return navButton;
+}
+
+async function createUpwardNavigationButton(renderDataList){
+    const navButton = document.createElement('button');
+    navButton.className = 'navButton';
+    navButton.innerHTML = '&#x21E7';
     navButton.addEventListener('click', () => {
         clearHourlyDataList();
         renderDataList(getHourlyDataList(location));
@@ -275,6 +296,58 @@ function createWeatherElement(weatherKey, weatherValClass){
     return div;
 }
 
+async function changePageStyle(location){
+    let weatherCondition = null;
+    const data = await getWeather(location)
+    .then((data) => {
+        weatherCondition = data.current.condition.text
+        changeBackground(weatherCondition);
+        changeTextColour(weatherCondition);
+    },
+    (rejected) => {
+        throw new Error(rejected);
+    })
+}
+
+function changeBackground(weatherCondition){
+    const body = document.querySelector('body');
+    console.log(weatherCondition);
+    switch(weatherCondition){
+        case "Sunny":
+            body.style.backgroundImage = 'url(../src/images/SunBackground.jpg)';
+            break;
+        case "Rainy":
+            body.style.backgroundImage = 'url(../src/images/RainBackground.jpg)';
+            break;
+        case "Partly cloudy":
+            body.style.backgroundImage = 'url(../src/images/PartlyCloudyBackground.jpg)';
+            break;
+        case "Clear":
+            body.style.backgroundImage = 'url(../src/images/ClearSkiesBackground.jpg)';
+            break;
+        case "Overcast":
+            body.style.backgroundImage = 'url(../src/images/OvercastBackground.jpg)';
+    }
+}
+
+function changeTextColour(weatherCondition){
+    const all = document.querySelector('.renderedContentContainer');
+    switch(weatherCondition){
+        case "Sunny":
+            
+            break;
+        case "Rainy":
+            
+            break;
+        case "Partly cloudy":
+            
+            break;
+        case "Clear":
+            all.style.color = 'red';
+            break;
+    }
+}
+
 let location = null;
 
 /**
@@ -283,15 +356,20 @@ let location = null;
  */
 async function pageAction(){
     location = getUserInput();
-    console.log(location);
     await submitInput(location)
     .then((resolved) => {
         clearPageData();
         clearHourlyDataList();
         renderPage();
         fillPageData(resolved);
-        renderFirstHourlyDataList(getHourlyDataList(location));
-    },(rejected) => {
+    })
+    .then(() => {
+        changePageStyle(location)
+    })
+    .then(() => {
+        renderFirstHourlyDataList(getHourlyDataList(location))
+    })
+    .catch((rejected) => {
         console.log(rejected);
     })
 }
