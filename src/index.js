@@ -30,18 +30,14 @@ async function pageAction(){
     .then((dataObject) => {
         clearPageData();
         clearHourlyDataList();
-        return dataObject;
-    })
-    .then((dataObject) => {
         renderPage();
+        changePageStyle(dataObject);
         fillPageData(dataObject);
-        return dataObject;
-    })
-    .then((dataObject) => {
-        changePageStyle(dataObject)
         const hourlyDataList = getHourlyDataList(dataObject);
         renderFirstHourlyDataList(hourlyDataList);
+        return dataObject;
     })
+    
     .catch((rejected) => {
         console.log(rejected);
     })

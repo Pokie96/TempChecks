@@ -137,7 +137,11 @@ export function renderFirstHourlyDataList(hourlyDataList){
         }
 
         //Add the weather data to each hour element:
-        hourData.innerHTML = `${hourlyDataList[i].temp_c}°C`
+        let hourlyTemp = hourlyDataList[i].temp_c
+        if(hourlyTemp % 1 != 0){
+            hourlyTemp = hourlyTemp.toFixed(0); //Remove the decimal point for better uniformity of the numbers
+        }
+        hourData.innerHTML = `${hourlyTemp}°C`
 
         //Append the hour time and hour data elements to the hour container element:
         hourElement.appendChild(hourTime);
@@ -178,7 +182,11 @@ async function renderSecondHourlyDataList(hourlyDataList){
         }
 
         //Add the weather data to each hour element:
-        hourData.innerHTML = `${hourlyDataList[i].temp_c}°C`
+        let hourlyTemp = hourlyDataList[i].temp_c
+        if(hourlyTemp % 1 != 0){
+            hourlyTemp = hourlyTemp.toFixed(0); //Remove the decimal point for better uniformity of the numbers
+        }
+        hourData.innerHTML = `${hourlyTemp}°C`
 
         //Append the hour time and hour data elements to the hour container element:
         hourElement.appendChild(hourTime);
