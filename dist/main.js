@@ -156,7 +156,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   changePageStyle: () => (/* binding */ changePageStyle)\n/* harmony export */ });\nfunction changePageStyle(dataObject){\n    let weatherCondition = dataObject.current.condition.text;\n    changeBackground(weatherCondition); // Change Back!!\n    changeTextColour(weatherCondition);\n}\n\nfunction changeBackground(weatherCondition){\n    const body = document.querySelector('body');\n    switch(weatherCondition){\n        case \"Sunny\":\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../src/images/SunBackground.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Rainy\":\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../src/images/RainBackground.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Partly cloudy\":\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../src/images/PartlyCloudyBackground.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Clear\":\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../src/images/ClearSkiesBackground.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Overcast\":\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../src/images/OvercastBackground.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Moderate or heavy rain shower\" :\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../src/images/HeavyRainBackground2.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Moderate rain\":\n            body.style.background = 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../src/images/HeavyRainBackground2.jpg)'\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Light rain\":\n    }\n}\n\nfunction changeTextColour(weatherCondition){\n    const all = document.querySelector('.renderedContentContainer');\n    switch(weatherCondition){\n        case \"Sunny\":\n            all.style.color = \"white\";\n            break;\n        case \"Rainy\":\n            all.style.color = \"rgb(204, 217, 228)\";\n            break;\n        case \"Partly cloudy\":\n            all.style.color = \"white\";\n            break;\n        case \"Clear\":\n            all.style.color = \"rgb(204, 217, 228)\";\n            break;\n        case \"Moderate or heavy rain shower\":\n            all.style.color = \"rgb(204, 217, 228)\";\n            break;\n    }\n}\n\n//# sourceURL=webpack://tempchecks/./src/pageStyler.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   changePageStyle: () => (/* binding */ changePageStyle)\n/* harmony export */ });\n/* harmony import */ var _images_ClearSkiesBackground_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./images/ClearSkiesBackground.jpg */ \"./src/images/ClearSkiesBackground.jpg\");\n/* harmony import */ var _images_HeavyRainBackground2_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/HeavyRainBackground2.jpg */ \"./src/images/HeavyRainBackground2.jpg\");\n/* harmony import */ var _images_OvercastBackground_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/OvercastBackground.jpg */ \"./src/images/OvercastBackground.jpg\");\n/* harmony import */ var _images_PartlyCloudyBackground_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/PartlyCloudyBackground.jpg */ \"./src/images/PartlyCloudyBackground.jpg\");\n/* harmony import */ var _images_RainBackground_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/RainBackground.jpg */ \"./src/images/RainBackground.jpg\");\n/* harmony import */ var _images_SunBackground_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/SunBackground.jpg */ \"./src/images/SunBackground.jpg\");\n\n\n\n\n\n\n\nfunction changePageStyle(dataObject){\n    let weatherCondition = dataObject.current.condition.text;\n    changeBackground(weatherCondition); \n    changeTextColour(weatherCondition);\n}\n\nfunction changeBackground(weatherCondition){\n    const body = document.querySelector('body');\n    switch(weatherCondition){\n        case \"Sunny\":\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${_images_SunBackground_jpg__WEBPACK_IMPORTED_MODULE_5__})`;\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Rainy\":\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${_images_RainBackground_jpg__WEBPACK_IMPORTED_MODULE_4__})`;\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Partly cloudy\":\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${_images_PartlyCloudyBackground_jpg__WEBPACK_IMPORTED_MODULE_3__})`\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Clear\":\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${_images_ClearSkiesBackground_jpg__WEBPACK_IMPORTED_MODULE_0__})`\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Overcast\":\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${_images_OvercastBackground_jpg__WEBPACK_IMPORTED_MODULE_2__})`\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Moderate or heavy rain shower\" :\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(${_images_HeavyRainBackground2_jpg__WEBPACK_IMPORTED_MODULE_1__})`\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Moderate rain\":\n            body.style.background = `linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(${_images_HeavyRainBackground2_jpg__WEBPACK_IMPORTED_MODULE_1__})`\n            body.style.backgroundRepeat = 'no-repeat';\n            body.style.backgroundPosition = 'center center';\n            body.style.backgroundSize = '100% 100%';\n            break;\n        case \"Light rain\":\n    }\n}\n\nfunction changeTextColour(weatherCondition){\n    const all = document.querySelector('.renderedContentContainer');\n    switch(weatherCondition){\n        case \"Sunny\":\n            all.style.color = \"white\";\n            break;\n        case \"Rainy\":\n            all.style.color = \"rgb(204, 217, 228)\";\n            break;\n        case \"Partly cloudy\":\n            all.style.color = \"white\";\n            break;\n        case \"Clear\":\n            all.style.color = \"rgb(204, 217, 228)\";\n            break;\n        case \"Moderate or heavy rain shower\":\n            all.style.color = \"rgb(204, 217, 228)\";\n            break;\n    }\n}\n\n//# sourceURL=webpack://tempchecks/./src/pageStyler.js?");
 
 /***/ }),
 
@@ -177,6 +177,66 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 eval("module.exports = __webpack_require__.p + \"dc41d0c4a82fb12bafa8.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/BackgroundImage2.jpg?");
+
+/***/ }),
+
+/***/ "./src/images/ClearSkiesBackground.jpg":
+/*!*********************************************!*\
+  !*** ./src/images/ClearSkiesBackground.jpg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"eff4c336af9cff3dc439.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/ClearSkiesBackground.jpg?");
+
+/***/ }),
+
+/***/ "./src/images/HeavyRainBackground2.jpg":
+/*!*********************************************!*\
+  !*** ./src/images/HeavyRainBackground2.jpg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"93c291b719e57be54093.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/HeavyRainBackground2.jpg?");
+
+/***/ }),
+
+/***/ "./src/images/OvercastBackground.jpg":
+/*!*******************************************!*\
+  !*** ./src/images/OvercastBackground.jpg ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"7e6a5c23871b4b4996b6.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/OvercastBackground.jpg?");
+
+/***/ }),
+
+/***/ "./src/images/PartlyCloudyBackground.jpg":
+/*!***********************************************!*\
+  !*** ./src/images/PartlyCloudyBackground.jpg ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"3c6d1166fc05e73f13db.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/PartlyCloudyBackground.jpg?");
+
+/***/ }),
+
+/***/ "./src/images/RainBackground.jpg":
+/*!***************************************!*\
+  !*** ./src/images/RainBackground.jpg ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"3a9f35c05e855b8694c3.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/RainBackground.jpg?");
+
+/***/ }),
+
+/***/ "./src/images/SunBackground.jpg":
+/*!**************************************!*\
+  !*** ./src/images/SunBackground.jpg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"c37b4fb0da59f9fbd1f3.jpg\";\n\n//# sourceURL=webpack://tempchecks/./src/images/SunBackground.jpg?");
 
 /***/ }),
 
